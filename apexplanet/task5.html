@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechNest Blog</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f4f4f4;
+      color: #333;
+      padding: 1rem;
+    }
+    header {
+      background: #004d66;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h3 {
+      margin-bottom: 0.5rem;
+      color: #004d66;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #888;
+    }
+    @media screen and (max-width: 600px) {
+      header {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TechNest Blog</h1>
+    <p>Your daily dose of tech articles</p>
+  </header>
+
+  <div class="container">
+    <section class="posts">
+      <div class="card">
+        <img src="https://source.unsplash.com/400x300/?coding" loading="lazy" alt="Coding" />
+        <div class="card-content">
+          <h3>Understanding Async JS</h3>
+          <p>Explore how asynchronous JavaScript works with callbacks, promises, and async/await.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://source.unsplash.com/400x300/?webdesign" loading="lazy" alt="Web Design" />
+        <div class="card-content">
+          <h3>Responsive Design Basics</h3>
+          <p>Learn how to make your websites responsive using CSS media queries and flexbox/grid.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://source.unsplash.com/400x300/?developer" loading="lazy" alt="Developer" />
+        <div class="card-content">
+          <h3>Optimizing Web Performance</h3>
+          <p>Tips on how to reduce load time, lazy-load resources, and improve UX for your site.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 TechNest. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Minimal JS for demonstration (deferred features like navigation, loader, etc. can be added)
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("TechNest loaded and optimized.");
+    });
+  </script>
+</body>
+</html>

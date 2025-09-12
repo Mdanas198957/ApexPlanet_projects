@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz & Joke Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: cadetblue;
+      color: #333;
+    }
+
+    h1{
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+        color:black;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 40px;
+        }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
+      flex: 1 1 300px;
+      max-width: 500px;
+    }
+
+    h2 {
+      color: #2c3e50;
+    }
+
+    .question {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    #joke {
+      background: #ecf0f1;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+    <center><h1>Welcome To Task-3</h1></center>
+  <div class="container">
+
+    <!-- Quiz Section -->
+    <div class="box">
+      <h2>Quick Quiz</h2>
+      <div class="question">
+        1. What does CSS stand for?<br>
+        <input type="radio" name="q1" value="a"> Creative Style Sheets<br>
+        <input type="radio" name="q1" value="b"> Cascading Style Sheets<br>
+        <input type="radio" name="q1" value="c"> Computer Style Sheets
+      </div>
+
+      <div class="question">
+        2. Which tag is used for JavaScript?<br>
+        <input type="radio" name="q2" value="a">&lt;js&gt;<br>
+        <input type="radio" name="q2" value="b">&lt;script&gt;<br>
+        <input type="radio" name="q2" value="c">&lt;javascript&gt;
+      </div>
+
+      <div class="question">
+        3. What does API stand for?<br>
+        <input type="radio" name="q3" value="a"> Application Programming Interface<br>
+        <input type="radio" name="q3" value="b"> Application Protocol Interface<br>
+        <input type="radio" name="q3" value="c"> Applied Program Interface
+      </div>
+
+      <button onclick="checkAnswers()">Submit Answers</button>
+      <div id="result"></div>
+    </div>
+
+    <!-- Joke Section -->
+    <div class="box">
+      <h2>Need a Laugh? 😄</h2>
+      <button onclick="getJoke()">Get a Random Joke</button>
+      <div id="joke"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const answers = {
+        q1: "b",
+        q2: "b",
+        q3: "a"
+      };
+
+      let score = 0;
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+
+      document.getElementById("result").innerText = `You scored ${score} out of 3`;
+    }
+
+    function getJoke() {
+      fetch("https://official-joke-api.appspot.com/random_joke")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("joke").innerHTML =
+            `<strong>${data.setup}</strong><br>${data.punchline}`;
+        })
+        .catch(() => {
+          document.getElementById("joke").innerText = "Failed to fetch joke!";
+        });
+    }
+  </script>
+
+</body>
+</html>

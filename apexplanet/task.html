@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Web Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 40px;
+      padding: 20px;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    header, section {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    form, .todo, .layout-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input, button {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    input:focus, button:hover {
+      outline: none;
+      border-color: #4facfe;
+      box-shadow: 0 0 5px #4facfe;
+    }
+
+    button {
+      background: #4facfe;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .error {
+      color: crimson;
+      font-size: 14px;
+    }
+
+    .layout-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+    }
+
+    .box {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #e3f2fd;
+      margin: 5px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌐 Mini Web Project</h1>
+    <p>Leveling up with HTML, CSS, Flexbox, Grid & JavaScript 🎯</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Contact Form -->
+    <section>
+      <h2>📬 Contact Form</h2>
+      <form id="contact-form">
+        <input type="text" id="name" placeholder="Your name" required />
+        <input type="email" id="email" placeholder="you@example.com" required />
+        <button type="submit">Send</button>
+        <div class="error" id="form-error"></div>
+      </form>
+    </section>
+
+    <!-- Responsive Layout with Flexbox and Grid -->
+    <section>
+      <h2>📱 Responsive Boxes</h2>
+      <div>
+        <button onclick="addBox()">➕ Add Box</button>
+        <button onclick="removeBox()">➖ Remove Box</button>
+        <button onclick="shuffleColors()">🎨 Shuffle Colors</button>
+      </div>
+      <div class="layout-demo" id="layout-demo">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+      </div>
+    </section>
+
+    <!-- To-Do List -->
+    <section>
+      <h2>✅ To-Do List</h2>
+      <div class="todo">
+        <input type="text" id="task-input" placeholder="What’s next?">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="tasks"></ul>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Form validation
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const errorDiv = document.getElementById('form-error');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        errorDiv.textContent = "🚫 Please enter a valid email address.";
+      } else {
+        errorDiv.textContent = "";
+        alert("🎉 Form submitted successfully!");
+      }
+    });
+
+    // To-Do list
+    function addTask() {
+      const taskInput = document.getElementById('task-input');
+      const taskText = taskInput.value.trim();
+      if (taskText === '') return;
+
+      const li = document.createElement('li');
+      li.textContent = taskText;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = '❌';
+      removeBtn.style.marginLeft = '10px';
+      removeBtn.style.background = 'transparent';
+      removeBtn.style.border = 'none';
+      removeBtn.style.cursor = 'pointer';
+      removeBtn.onclick = function() {
+        li.remove();
+      };
+
+      li.appendChild(removeBtn);
+      document.getElementById('tasks').appendChild(li);
+      taskInput.value = '';
+    }
+
+    // Interactive Responsive Boxes
+    let boxCount = 4;
+
+    function addBox() {
+      boxCount++;
+      const newBox = document.createElement('div');
+      newBox.className = 'box';
+      newBox.textContent = `Box ${boxCount}`;
+      document.getElementById('layout-demo').appendChild(newBox);
+    }
+
+    function removeBox() {
+      const container = document.getElementById('layout-demo');
+      if (container.lastChild) container.removeChild(container.lastChild);
+      if (boxCount > 0) boxCount--;
+    }
+
+    function shuffleColors() {
+      const boxes = document.querySelectorAll('.box');
+      boxes.forEach(box => {
+        box.style.backgroundColor = `hsl(${Math.floor(Math.random()*360)}, 90%, 85%)`;
+      });
+    }
+  </script>
+</body>
+</html>
