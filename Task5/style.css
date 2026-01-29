@@ -94,7 +94,7 @@ main {
 
 .checkout {
   flex: 1;
-  background-color: #58e4d4;
+  background-color: #1c1c1c;
   padding: 1rem;
   border-radius: 12px;
   max-width: 300px;
@@ -144,6 +144,7 @@ footer {
   background-color: #58e4d4;
 
 }
+
 
 
 
